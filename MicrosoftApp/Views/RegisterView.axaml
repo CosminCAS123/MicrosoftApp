@@ -1,0 +1,120 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 		xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:vm ="clr-namespace:MicrosoftApp.ViewModels;assembly=MicrosoftApp"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="500"
+			 
+			 Width="400"
+			 Height="500"
+			 Background="{StaticResource ThatGray}"
+			 x:DataType="vm:RegisterVM"
+             x:Class="MicrosoftApp.Views.RegisterView">
+	<Grid RowDefinitions="* , * , * , * , * , * , *"
+		  >
+		<Grid.Styles>
+			<Style Selector="TextBlock">
+				<Setter Property="Foreground" Value="White"></Setter>
+				<Setter Property="FontWeight" Value="Light"></Setter>
+			</Style>
+			<Style Selector="TextBox" >
+				
+				<Setter Property="Background" Value="Gray"></Setter>
+			</Style>
+			<Style Selector="StackPanel">
+				<Setter Property="HorizontalAlignment" Value="Left"></Setter>
+				<Setter Property="Margin" Value="20 , 0 , 0 , 0"></Setter>
+			</Style>
+		
+		
+		</Grid.Styles>
+		<Button Grid.Row="0"
+				Command="{Binding BackToLoginCommand}"
+				VerticalAlignment="Top"
+				HorizontalAlignment="Left"
+				Width="70"
+				Height="30"
+				Margin="5 , 5 , 0 , 0">
+			<materialIcons:MaterialIcon Kind="ArrowLeftBoldOutline"
+										Foreground="White"
+										Width="25"
+										Height="25"
+										></materialIcons:MaterialIcon>
+		</Button>
+		<TextBlock FontSize="30" Grid.Row="0"
+				   FontWeight="SemiLight"
+				   HorizontalAlignment="Center"
+				   VerticalAlignment="Center">Create Account</TextBlock>
+		<StackPanel Grid.Row="1">
+		<TextBlock Margin="4 , 0 , 0 , 0">Email</TextBlock>
+		<TextBox Width="300"
+				 Watermark="Type your adress ..."
+				
+				 Text="{Binding Email , Mode=OneWayToSource}"
+				></TextBox>
+
+			<materialIcons:MaterialIcon Kind="{Binding EmailKind}" 
+										Foreground="{Binding EmailBrush}"
+										Width="25"
+										
+										Height="25"
+										Margin="0, -33 , -340 , 0"></materialIcons:MaterialIcon>
+		</StackPanel>
+		<StackPanel Grid.Row="2" >
+			<TextBlock Margin="4 , 0 , 0 , 0">Full Name</TextBlock>
+			<TextBox Width="300"
+					 Watermark="Type your real name ..."
+					 Text="{Binding FullName , Mode=OneWayToSource}"></TextBox>
+			<materialIcons:MaterialIcon Kind="{Binding FullNameKind}"
+									Foreground="{Binding FullNameBrush}"
+									Width="25"
+										
+									Height="25"
+									Margin="0, -33 , -340 , 0"></materialIcons:MaterialIcon>
+		</StackPanel>
+		<StackPanel Grid.Row="3">
+			<TextBlock Margin="4 , 0 , 0 , 0">Username</TextBlock>
+			<TextBox Width="300"
+					 Watermark="Type your preferred username ..."
+					 Text="{Binding Username , Mode=OneWayToSource}"></TextBox>
+			<materialIcons:MaterialIcon Kind="{Binding UsernameKind}"
+									Foreground="{Binding UsernameBrush}"
+									Width="25"
+										
+									Height="25"
+									Margin="0, -33 , -340 , 0"></materialIcons:MaterialIcon>
+		</StackPanel>
+		<StackPanel Grid.Row="4">
+			<TextBlock Margin="4 , 0 , 0 , 0">Password</TextBlock>
+			<TextBox Width="300"
+					 Watermark="Type your password ..."
+					 Text="{Binding Password , Mode=OneWayToSource}"></TextBox>
+			<materialIcons:MaterialIcon Kind="{Binding PasswordKind}"
+									Foreground="{Binding PasswordBrush}"
+									Width="25"
+										
+									Height="25"
+									Margin="0, -33 , -340 , 0"></materialIcons:MaterialIcon>
+		</StackPanel>
+		<StackPanel Grid.Row="5">
+			<TextBlock Margin="4 , 0 , 0 , 0">Confirm Password</TextBlock>
+			<TextBox Width="300"
+					 Watermark="Type your password again ..."
+					 Text="{Binding ConfirmPassword , Mode=OneWayToSource}"></TextBox>
+			<materialIcons:MaterialIcon Kind="{Binding ConfirmPasswordKind}"
+									Foreground="{Binding ConfirmPasswordBrush}"
+									Width="25"
+										
+									Height="25"
+									Margin="0, -33 , -340 , 0"></materialIcons:MaterialIcon>
+		</StackPanel>
+		<Button Grid.Row="6" HorizontalAlignment="Center"
+				VerticalAlignment="Center"
+				Foreground="White"
+				Height="34"
+				Command="{Binding RegisterCommand}"
+				HorizontalContentAlignment="Center"
+				Width="100">Register</Button>
+	</Grid>
+</UserControl>

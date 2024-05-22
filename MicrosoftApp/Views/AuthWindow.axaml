@@ -1,0 +1,47 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    	xmlns:views="clr-namespace:MicrosoftApp.Views;assembly=MicrosoftApp"
+		xmlns:vm ="clr-namespace:MicrosoftApp.ViewModels;assembly=MicrosoftApp"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="500"
+		Width="800"
+		Height="500"
+		CanResize="False"
+		WindowStartupLocation="CenterScreen"
+		 SystemDecorations="None"
+	    
+        x:Class="MicrosoftApp.Views.AuthWindow"
+        Title="AuthWindow">
+
+	<Grid Width="800"
+		  Height="500"
+		  ColumnDefinitions="* , *">
+		<Grid.DataTemplates>
+			<DataTemplate x:DataType="vm:RegisterVM">
+				<views:RegisterView></views:RegisterView>
+			</DataTemplate>
+			<DataTemplate x:DataType="vm:LoginVM">
+				<views:LoginView></views:LoginView>
+			</DataTemplate>
+		</Grid.DataTemplates>
+		<Image Source="avares://MicrosoftApp/Assets/AuthAnimePic.jpg"
+			   Grid.Column="0"
+			   Stretch="Fill"
+			 
+			   ></Image>
+		<TextBlock Grid.Column="0"
+				   HorizontalAlignment="Center"
+				   FontWeight="Bold"
+				   FontSize="16"
+				   Foreground="WhiteSmoke"
+				   Margin="0 , 20 , 0 , 0">
+			Simplify Your Tasks. Enhance Your Productivity.
+		</TextBlock>
+
+
+		<UserControl Grid.Column="1" x:DataType="vm:AuthWindowVM" Content="{Binding AuthContent}"></UserControl>
+		
+	</Grid>
+
+</Window>

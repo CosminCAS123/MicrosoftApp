@@ -1,0 +1,49 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:vm ="clr-namespace:MicrosoftApp.ViewModels;assembly=MicrosoftApp"
+		xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="400"
+		Width="400"
+		Height="400"
+		  WindowStartupLocation="CenterScreen"
+		 Background="{StaticResource ThatGray}"
+         SystemDecorations="None"
+         Topmost="True"
+		CanResize="False"
+        x:Class="MicrosoftApp.Views.SplashScreen"
+        Title="SplashScreen">
+	
+	<StackPanel Width="400"
+				Height="400">
+		<TextBlock Margin="10 , 10 , 0 , 0"
+				   Foreground="White"
+				   >Clone-App made by <LineBreak></LineBreak>
+		   <Run FontWeight="Bold"
+				Foreground="Red">Demon King Programmer</Run></TextBlock>
+		<materialIcons:MaterialIcon Kind="Check"
+									Width="100"
+									Height="100"
+									Foreground="Green"
+									Margin="0 , 70 , 0 ,0 "
+									></materialIcons:MaterialIcon>
+		<TextBlock x:DataType="vm:SplashScreenVM"
+				   Text="{Binding StartupMessage}"
+				   FontSize="18"
+				   Margin="0 , 0 , 0 , 0"
+				   FontWeight="SemiBold"
+				   HorizontalAlignment="Center"
+				   Foreground="White">OrganizeIT</TextBlock>
+       
+		<ProgressBar Height="30"
+					 Width="400"
+					 x:DataType="vm:SplashScreenVM"
+					 Margin="0 , 134 , 0 , 0"
+					 ShowProgressText="True"
+					 Value="{Binding ProgressValue}"
+					 Foreground="Red"
+					 Background="Transparent"></ProgressBar>
+	</StackPanel>
+	
+</Window>

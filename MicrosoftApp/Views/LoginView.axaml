@@ -1,0 +1,111 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="clr-namespace:MicrosoftApp.ViewModels;assembly=MicrosoftApp"
+			 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+			xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="500"
+			 Background="{StaticResource ThatGray}"
+			 Width="400"
+			 Height="500"
+			 x:DataType="vm:LoginVM"
+             x:Class="MicrosoftApp.Views.LoginView">
+	<Grid ColumnDefinitions="300 , 100">
+
+		<materialIcons:MaterialIcon Grid.Column="1"
+									Margin="-62, -122 , 0 , 0 "
+									Kind="{Binding UsernameKind}"
+									
+									Width="25" Height="25" Foreground="{Binding UsernameBrush}"
+								></materialIcons:MaterialIcon>
+		<materialIcons:MaterialIcon Grid.Column="1"
+									Margin="-62, 27 , 0 , 0"
+							        
+			
+			Kind="{Binding PasswordKind}" Width="25" Height="25" Foreground="{Binding PasswordBrush}"
+								></materialIcons:MaterialIcon>
+		<StackPanel
+					    Grid.Column="0"
+						HorizontalAlignment="Right"
+						VerticalAlignment="Stretch">
+			<TextBlock HorizontalAlignment="Center"
+					   FontSize="30"
+					   Foreground="White"
+					   FontWeight="SemiLight"
+					   Margin="0 , 60 , 0 , 0">OrganizeIT</TextBlock>
+
+			<TextBlock HorizontalAlignment="Center"
+					   Margin="0 , 50 ,130 , 0"
+					   Foreground="White"
+					   FontWeight="Light"
+					   >Username</TextBlock>
+			<TextBox Width="200"
+					 Height="30"
+					 Text="{Binding Username}"
+					 Watermark="Type your username"
+					 
+					 Background="Gray"
+					 Margin="0 , 3 , 0 , 0">
+
+			</TextBox>
+			
+
+			<TextBlock Margin="0 , 25 , 130 , 0"
+					   HorizontalAlignment="Center"
+					   Foreground="White"
+					   FontWeight="Light">Password</TextBlock>
+			<TextBox Width="200"
+					 Height="30"
+					 Text="{Binding Password}"
+				Watermark="Type your password"
+					 Background="Gray"
+					 Margin="0 , 0 , 0 , 0">
+
+			</TextBox>
+
+
+			<Button
+					HorizontalAlignment="Center"
+					Width="60"
+					Height="34"
+					FontSize="13"
+					HorizontalContentAlignment="Center"
+					VerticalContentAlignment="Center"
+					CornerRadius="10"
+					Foreground="White"
+					Margin="0 , 30 , 0 , 0">Log In</Button>
+			<TextBlock
+					   FontSize="14"
+					   VerticalAlignment="Bottom"
+					   HorizontalAlignment="Center"
+					   Margin="0 , 20 , 0 ,100"
+					   x:DataType="vm:LoginVM"
+					   Foreground="{Binding RegisterColor}"
+					   Text="Don't have an account?"
+				   
+					   TextDecorations="Underline">
+
+				<i:Interaction.Behaviors>
+					<ia:EventTriggerBehavior EventName="PointerEntered">
+						<InvokeCommandAction
+											 Command="{Binding DontHaveAccPointerEnteredCommand}"  ></InvokeCommandAction>
+					</ia:EventTriggerBehavior>
+					<ia:EventTriggerBehavior EventName="PointerExited">
+						<InvokeCommandAction
+											 Command="{Binding DontHaveAccPointerExitedCommand}"  ></InvokeCommandAction>
+					</ia:EventTriggerBehavior>
+					<ia:EventTriggerBehavior EventName="PointerPressed">
+						<InvokeCommandAction
+											 Command="{Binding DontHaveAccPointerPressedCommand}"></InvokeCommandAction>
+					</ia:EventTriggerBehavior>
+
+				</i:Interaction.Behaviors>
+
+
+
+			</TextBlock>
+		</StackPanel>
+	</Grid>
+</UserControl>

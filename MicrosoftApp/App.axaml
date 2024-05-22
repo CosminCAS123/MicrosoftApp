@@ -1,0 +1,19 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="MicrosoftApp.App"
+			 xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+
+		     
+
+            >
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.Styles>
+		<FluentTheme></FluentTheme>
+		<materialIcons:MaterialIconStyles />
+
+	</Application.Styles>
+	<Application.Resources>
+		<SolidColorBrush x:Key="ThatGray">#302f2b</SolidColorBrush>
+	</Application.Resources>
+</Application>
