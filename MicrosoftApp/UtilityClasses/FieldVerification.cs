@@ -10,6 +10,33 @@ namespace MicrosoftApp.UtilityClasses
     public static class FieldVerification
     {
 
+        public static class Tips
+        {
+            public const string EmailTip = "Email must end in @gmail.com / @yahoo.com and not be empty.";
+            public const string UsernameTip = "Username must contain at least 1 capital letter, 1 digit, and have a length of 6-15.";
+            public const string PasswordTip = "Password must contain at least 1 special character, 1 digit, and have a length of 6-15.";
+            public const string FullNameTip = "Real name must contain only letters, and have a length of 6-20.";
+            public const string ConfirmPasswordTip = "This field must match the password.";
+            public const string GoodTip = "This field looks fine!";
+
+        }
+
+        public static class Errors
+        {
+            public static class Register
+            {
+                public const string RegisteredSuccessfully = "Account registered successfully!";
+                public const string UsernameAlreadyExists = "An account with this username already exists!";
+                public const string EmailAlreadyExists = "An account with this email adress already exists!";
+            }
+            public static class Login
+            {
+                public const string UsernameNotFound = "An account with this username could not be found!";
+                public const string PasswordNotMatching = "Incorrect password for this username!";
+                public const string GoodTip = "Good!";
+            }
+        }
+
         private static List<char> SpecialCharacters;
 
         static FieldVerification()

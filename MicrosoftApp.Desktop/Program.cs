@@ -2,7 +2,7 @@
 
 using Avalonia;
 using Avalonia.ReactiveUI;
-
+using Microsoft.Extensions.DependencyInjection;
 namespace MicrosoftApp.Desktop;
 
 class Program
