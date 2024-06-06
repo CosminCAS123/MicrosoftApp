@@ -30,6 +30,7 @@ namespace MicrosoftApp.ViewModels
         private AuthField usernameField;
         private AuthField fullnameField;
         private IUserService user_service;
+        private ITaskService task_service;
         private ISolidColorBrush errorColor;
         private string errorText = "";
         private CancellationTokenSource _loadingCancellationTokenSource;
@@ -59,9 +60,10 @@ namespace MicrosoftApp.ViewModels
 
         #endregion
 
-        public RegisterVM(AuthWindowVM authvm, IUserService userService)
+        public RegisterVM(AuthWindowVM authvm, IUserService userService , ITaskService taskService)
         {
             this.user_service = userService;
+            this.task_service = taskService;
             this.authWindowVM = authvm;
             BackToLoginCommand = ReactiveCommand.Create(onBackToLogin);
             
@@ -111,11 +113,11 @@ namespace MicrosoftApp.ViewModels
         }
         private async Task registerCommand()
         {
-            var service = this.user_service;
+            
             startLoading();
             await Task.Delay(2000);
-            bool exists_username = await service.ExistsByUsernameAsync(this.UsernameField.Text);
-            bool exists_email = await service.ExistsByEmailAdressAsync(this.EmailField.Text);
+            bool exists_username = await user_service.ExistsByUsernameAsync(this.UsernameField.Text);
+            bool exists_email = await user_service.ExistsByEmailAdressAsync(this.EmailField.Text);
             stopLoading();
             if (exists_username)//account with username exists
             {
@@ -132,7 +134,15 @@ namespace MicrosoftApp.ViewModels
            
             //account can be created
             var user = new   User(this.EmailField.Text, this.PasswordField.Text, this.UsernameField.Text, this.FullNameField.Text);
-            await service.AddUserAsync(user);
+            await user_service.AddUserAsync(user);
+            //add default tasks
+            var important_tasks = new TaskList { Name = "Important", UserID = user.ID, Tasks = new List<UserTask>() };
+            var all_tasks = new TaskList { Name = "Tasks", UserID = user.ID, Tasks = new List<UserTask>() };
+            var today_tasks = new TaskList { Name = "My Day", UserID = user.ID, Tasks = new List<UserTask>() };
+            await task_service.AddTaskListAsync(important_tasks);
+            await task_service.AddTaskListAsync(all_tasks);
+            await task_service.AddTaskListAsync(today_tasks);
+
             this.ErrorText = FieldVerification.Errors.Register.RegisteredSuccessfully;
             this.ErrorColor = Brushes.Green;
             

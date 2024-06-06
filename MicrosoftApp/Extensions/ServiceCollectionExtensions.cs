@@ -17,6 +17,8 @@ namespace MicrosoftApp.Extensions
             collection.AddDbContext<DatabaseContext>();
 
             collection.AddScoped<IUserRepository, UserRepository>();
+            collection.AddScoped<ITaskRepository,  TaskRepository>();
+            collection.AddScoped<ITaskService, TaskService>();
 
             collection.AddScoped<IUserService, UserService>();
         }

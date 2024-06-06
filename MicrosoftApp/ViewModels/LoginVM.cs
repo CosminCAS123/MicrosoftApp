@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MicrosoftApp.Repositories;
 using MicrosoftApp.Services;
 using MicrosoftApp.UtilityClasses;
+using MicrosoftApp.Views;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -112,7 +113,7 @@ namespace MicrosoftApp.ViewModels
             await Task.Delay(2000);
             //verify if username exists in db 
             var user = await user_service!.GetUserByUsername(this.UsernameField.Text);
-            stopLoading();
+           
             if (user is not null)
             {
                 //check if password matches
@@ -120,20 +121,35 @@ namespace MicrosoftApp.ViewModels
                 {
                     this.ErrorText = FieldVerification.Errors.Login.GoodTip;
                     this.ErrorBrush = Brushes.Green;
-                    
+
                     //ENTER APP//////////////
+                    var mainVM = new MainWindowVM(user);
+                    mainVM.FirstColumnVM = new FirstMainColumnVM();
+                    var mainWindow = new MainWindow();
+                    mainWindow.DataContext = mainVM;
+                   
+                    await Task.Delay(1000);
+                    stopLoading();
+                    mainWindow.Show();
+                    this.authVM.Window.Close();
+
+                    
                 }
                 else
                 {
+                    stopLoading();
                     this.ErrorText = FieldVerification.Errors.Login.PasswordNotMatching;
                     this.ErrorBrush = Brushes.Red;
+                   
                 }
             }
             else
             {
                 //username not found
+                stopLoading();
                 this.ErrorText = FieldVerification.Errors.Login.UsernameNotFound;
                 this.ErrorBrush = Brushes.Red;
+               
             }
 
           
@@ -167,7 +183,7 @@ namespace MicrosoftApp.ViewModels
         private void changeRegisterColorToRed() => this.RegisterColor = Brushes.Red;
 
         private void changeRegisterColorToWhite() => this.RegisterColor = Brushes.White;
-        private void goToRegister() => this.authVM.AuthContent = new RegisterVM(this.authVM, services.GetRequiredService<IUserService>());
+        private void goToRegister() => this.authVM.AuthContent = new RegisterVM(this.authVM, services.GetRequiredService<IUserService>() , services.GetRequiredService<ITaskService>());
       
         
     }

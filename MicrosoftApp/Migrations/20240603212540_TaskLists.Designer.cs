@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MicrosoftApp.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MicrosoftApp.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240603212540_TaskLists")]
+    partial class TaskLists
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,20 +27,17 @@ namespace MicrosoftApp.Migrations
 
             modelBuilder.Entity("MicrosoftApp.Data.TaskList", b =>
                 {
-                    b.Property<int>("TaskListID")
+                    b.Property<int>("UserID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TaskListID"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserID"));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("integer");
-
-                    b.HasKey("TaskListID");
+                    b.HasKey("UserID");
 
                     b.ToTable("TaskLists");
                 });
@@ -73,11 +73,8 @@ namespace MicrosoftApp.Migrations
 
             modelBuilder.Entity("MicrosoftApp.Data.UserTask", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    b.Property<string>("ParentList")
+                        .HasColumnType("text");
 
                     b.Property<string>("DueDate")
                         .IsRequired()
@@ -89,20 +86,16 @@ namespace MicrosoftApp.Migrations
                     b.Property<bool>("IsImportant")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("ParentList")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int?>("TaskListID")
+                    b.Property<int?>("TaskListUserID")
                         .HasColumnType("integer");
 
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("ParentList");
 
-                    b.HasIndex("TaskListID");
+                    b.HasIndex("TaskListUserID");
 
                     b.ToTable("UserTask");
                 });
@@ -111,7 +104,7 @@ namespace MicrosoftApp.Migrations
                 {
                     b.HasOne("MicrosoftApp.Data.TaskList", null)
                         .WithMany("Tasks")
-                        .HasForeignKey("TaskListID");
+                        .HasForeignKey("TaskListUserID");
                 });
 
             modelBuilder.Entity("MicrosoftApp.Data.TaskList", b =>

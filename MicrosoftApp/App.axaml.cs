@@ -31,6 +31,7 @@ public partial class App : Application
         var authVM = new AuthWindowVM();
         var authWindow = new AuthWindow();
         authWindow.DataContext = authVM;
+        authVM.Window = authWindow;
         authWindow.Show();
 
 

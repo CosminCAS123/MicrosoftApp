@@ -18,6 +18,8 @@ namespace MicrosoftApp.ViewModels
             get => this.authContent;
             set => this.RaiseAndSetIfChanged(ref this.authContent, value);
         }
+        public Window Window { get; set; }
+
         private ViewModelBase authContent;
 
         public AuthWindowVM()
