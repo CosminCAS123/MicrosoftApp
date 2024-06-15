@@ -22,6 +22,7 @@ namespace MicrosoftApp.ViewModels
         {
             private MaterialIconKind icon;
             private string text = null!;
+             public int TaskListID { get; set; }
           
             public MaterialIconKind Icon { get => this.icon; set => this.RaiseAndSetIfChanged(ref this.icon, value); } 
             public string Title { get => this.text; set => this.RaiseAndSetIfChanged(ref this.text, value); }
@@ -32,6 +33,9 @@ namespace MicrosoftApp.ViewModels
                 this.Title = text;
             }
         }
+
+        private TaskMenuItem selected_item;
+        public TaskMenuItem SelectedItem { get => this.selected_item; set => this.RaiseAndSetIfChanged(ref this.selected_item, value); }
         private ITaskService task_service = null!;
         private string initials;
         public string Initials { get => this.initials; set => this.RaiseAndSetIfChanged(ref this.initials, value); }
@@ -40,16 +44,29 @@ namespace MicrosoftApp.ViewModels
         private ObservableCollection<TaskMenuItem> tasks;
         public ObservableCollection<TaskMenuItem> TaskMenuItems { get => this.tasks ; set => this.RaiseAndSetIfChanged(ref this.tasks, value); }
         public ReactiveCommand<Unit, Unit> NewTaskListCommand { get; set; }
+        public ReactiveCommand<Unit , Unit> RemoveTaskListCommand { get; set; }
         public  FirstMainColumnVM()
         {
             this.task_service = App.Current!.Services!.GetRequiredService<ITaskService>();
             this.User = MainWindowVM.CurrentUser;
             addMenuItems();
             this.NewTaskListCommand = ReactiveCommand.CreateFromTask(addnewtasklist);
+            this.RemoveTaskListCommand = ReactiveCommand.CreateFromTask(removeTaskListCommand);
             this.Initials = getFirstTwoInitials();
 
         }
-        
+
+        private async Task removeTaskListCommand()
+        {
+            //we will remove from the ui and from the db as well
+            //first from the ui, since  we dont want any freezing.
+            int task_id = this.SelectedItem.TaskListID;
+            this.TaskMenuItems.Remove(this.SelectedItem);
+            await this.task_service.RemoveTasklistByIdAsync(task_id);
+
+
+        }
+
         //Get first 2 initials from real name
         private string getFirstTwoInitials()
         {
@@ -71,13 +88,15 @@ namespace MicrosoftApp.ViewModels
 
 
         }
+
+       
         private async Task addMenuItems()
         {
 
 
             //loop through all list of ListTasks and add them to the taskmenuitems
             this.TaskMenuItems = new ObservableCollection<TaskMenuItem>();
-            var all_tasklists = await this.task_service.GetTaskListByIdAsync(User.ID);
+            var all_tasklists = await this.task_service.GetAllTaskListsAsync(User.ID);
             foreach(var tasklist in all_tasklists)
             {
                 MaterialIconKind icon;
@@ -97,6 +116,7 @@ namespace MicrosoftApp.ViewModels
                         break;
                 }
                 var taskmenuitem = new TaskMenuItem(icon, tasklist.Name);
+                taskmenuitem.TaskListID = tasklist.TaskListID;
                 this.TaskMenuItems.Add(taskmenuitem);
             }
 

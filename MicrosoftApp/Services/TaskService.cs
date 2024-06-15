@@ -21,20 +21,22 @@ namespace MicrosoftApp.Services
             await this.task_repository.AddAsync(taskList);
         }
 
-        public async Task<List<TaskList>> GetAllTaskListsAsync()
+       
+        
+        public async Task RemoveTasklistByIdAsync(int id)
         {
-            return await this.task_repository.GetAllAsync();
+            await this.task_repository.DeleteByIdAsync(id);
         }
-
-        public async Task<List<TaskList>> GetTaskListByIdAsync(int id)
-        {
-            var taskList = await this.task_repository.GetByIdAsync(id);
-            return taskList;
-        }
-
         public async Task RemoveTaskList(TaskList taskList)
         {
             await this.task_repository.Delete(taskList);
+        }
+
+       
+
+        public async Task<List<TaskList>> GetAllTaskListsAsync(int user_id)
+        {
+            return await this.task_repository.GetAllByUserIdAsync(user_id);
         }
     }
 }

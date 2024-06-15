@@ -11,9 +11,10 @@ namespace MicrosoftApp.Repositories
     {
         Task AddAsync(TaskList entity);
         Task Delete(TaskList entity);
-        Task<List<TaskList>> GetAllAsync();
-        Task<List<TaskList>> GetByIdAsync(int id);
+        
+        Task<List<TaskList>> GetAllByUserIdAsync(int id);
         Task UpdateAsync();
+        Task DeleteByIdAsync(int task_id);
         
     }
 }

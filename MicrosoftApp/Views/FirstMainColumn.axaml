@@ -3,6 +3,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:vm ="clr-namespace:MicrosoftApp.ViewModels;assembly=MicrosoftApp"
+			  xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
 			 xmlns:materialIcons ="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="700"
              x:Class="MicrosoftApp.Views.FirstMainColumn"
@@ -19,6 +21,7 @@
 		</Grid.RowDefinitions>
 
 		<!--Profile section-->
+		
 		<StackPanel Spacing="10">
 		<StackPanel Orientation="Horizontal" Grid.Row="0" Spacing="10"
 					Margin="10 , 10 , 0 ,0">
@@ -46,39 +49,58 @@
 		
 		<!--Tasks section-->
 
+			
+
 
 		<ListBox Grid.Row="1" Width="280"
 			 Margin="0 ,10 , 0 ,0"
 			 Background="White"
 			 HorizontalAlignment="Center"
+		     SelectedItem="{Binding SelectedItem}"
 				 ItemsSource="{Binding TaskMenuItems}"
 		 >
-
+			
 			<ListBox.ItemTemplate>
 				<DataTemplate>
-					<StackPanel Orientation="Horizontal" Spacing="10" >
+				
+					<StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Stretch" 
+								Background="Transparent">
 						<StackPanel.ContextMenu>
 							<ContextMenu>
-								<MenuItem Header="Rename">
+								
+								<MenuItem Header="Rename"
+										
+										  >
+									
 									<MenuItem.Icon>
 										<materialIcons:MaterialIcon Kind="RenameBoxOutline"></materialIcons:MaterialIcon>
 									</MenuItem.Icon>
 								</MenuItem>
+								
+								
 								<MenuItem Header="Duplicate">
 									<MenuItem.Icon>
 										<materialIcons:MaterialIcon Kind="ContentCopy"></materialIcons:MaterialIcon>
 									</MenuItem.Icon>
 								</MenuItem>
-								<MenuItem Header="Remove">
+								
+								<MenuItem Header="Remove"
+										
+										>
 									<MenuItem.Icon >
 										<materialIcons:MaterialIcon Foreground="Red"
 											Kind="TrashCanOutline"></materialIcons:MaterialIcon>
 									</MenuItem.Icon>
 								</MenuItem>
+								
 							</ContextMenu>
 						</StackPanel.ContextMenu>
-						<materialIcons:MaterialIcon Kind="{Binding Icon}" Width="30" Height="30"></materialIcons:MaterialIcon>
-						<TextBlock VerticalAlignment="Center" Text="{Binding Title}" FontSize="16"></TextBlock>
+						<materialIcons:MaterialIcon Kind="{Binding Icon}" Width="30" Height="30">
+							
+						</materialIcons:MaterialIcon>
+						<TextBlock VerticalAlignment="Center" Text="{Binding Title}" FontSize="16">
+							
+						</TextBlock>
 					</StackPanel>
 				</DataTemplate>
 			</ListBox.ItemTemplate>

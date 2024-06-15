@@ -14,9 +14,9 @@ namespace MicrosoftApp.Services
         Task AddTaskListAsync(TaskList taskList);
         Task RemoveTaskList(TaskList taskList);
 
-        Task<List<TaskList>> GetTaskListByIdAsync(int id);
+        Task RemoveTasklistByIdAsync(int id);
 
-        Task<List<TaskList>> GetAllTaskListsAsync();
+        Task<List<TaskList>> GetAllTaskListsAsync(int user_id);
 
 
         
