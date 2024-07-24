@@ -35,7 +35,16 @@ namespace MicrosoftApp.ViewModels
         }
 
         private TaskMenuItem selected_item;
-        public TaskMenuItem SelectedItem { get => this.selected_item; set => this.RaiseAndSetIfChanged(ref this.selected_item, value); }
+        public TaskMenuItem SelectedItem 
+        {
+            
+            get => this.selected_item;
+            
+            set => this.RaiseAndSetIfChanged(ref this.selected_item, value);
+        
+        
+        }
+
         private ITaskService task_service = null!;
         private string initials;
         public string Initials { get => this.initials; set => this.RaiseAndSetIfChanged(ref this.initials, value); }
@@ -48,11 +57,13 @@ namespace MicrosoftApp.ViewModels
         public  FirstMainColumnVM()
         {
             this.task_service = App.Current!.Services!.GetRequiredService<ITaskService>();
-            this.User = MainWindowVM.CurrentUser;
-            addMenuItems();
+            this.User = MainWindowVM.CurrentUser!;
             this.NewTaskListCommand = ReactiveCommand.CreateFromTask(addnewtasklist);
             this.RemoveTaskListCommand = ReactiveCommand.CreateFromTask(removeTaskListCommand);
             this.Initials = getFirstTwoInitials();
+            addMenuItems();
+            
+           
 
         }
 

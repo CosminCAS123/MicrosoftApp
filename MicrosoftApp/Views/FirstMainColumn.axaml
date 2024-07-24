@@ -49,14 +49,14 @@
 		
 		<!--Tasks section-->
 
-			
 
-
+		
+	
 		<ListBox Grid.Row="1" Width="280"
 			 Margin="0 ,10 , 0 ,0"
 			 Background="White"
 			 HorizontalAlignment="Center"
-		     SelectedItem="{Binding SelectedItem}"
+		     SelectedItem="{Binding SelectedItem , Mode=OneWayToSource}"
 				 ItemsSource="{Binding TaskMenuItems}"
 		 >
 			
@@ -78,14 +78,17 @@
 								</MenuItem>
 								
 								
-								<MenuItem Header="Duplicate">
+								<MenuItem Header="Duplicate"
+										 >
 									<MenuItem.Icon>
 										<materialIcons:MaterialIcon Kind="ContentCopy"></materialIcons:MaterialIcon>
 									</MenuItem.Icon>
 								</MenuItem>
 								
 								<MenuItem Header="Remove"
-										
+										   x:DataType="vm:FirstMainColumnVM"
+										  Command="{Binding RemoveTaskListCommand}"
+										 
 										>
 									<MenuItem.Icon >
 										<materialIcons:MaterialIcon Foreground="Red"
@@ -95,6 +98,7 @@
 								
 							</ContextMenu>
 						</StackPanel.ContextMenu>
+						
 						<materialIcons:MaterialIcon Kind="{Binding Icon}" Width="30" Height="30">
 							
 						</materialIcons:MaterialIcon>
