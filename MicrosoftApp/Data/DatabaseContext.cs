@@ -9,7 +9,7 @@ namespace MicrosoftApp.Data
 {
     public class DatabaseContext : DbContext
     {
-        private readonly string ConnectionString = "Host=localhost;Port=5432;Username=postgres;Password=Teodora123;Database=OrganizeITdatabase";
+        private readonly string ConnectionString = "notoriginalstring";
         public DbSet<User> Users { get; set; }
         public DbSet<TaskList> TaskLists { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)    
