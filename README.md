@@ -15,6 +15,10 @@ I'm also very satisfied with the visuals I managed to build, since I was never t
 
 ![image1](https://github.com/user-attachments/assets/ed9893a2-a71b-455e-8a24-d9e637bef519)
 ![image2](https://github.com/user-attachments/assets/5fc0feca-caed-4e55-81a6-5c84b9dc489a)
+![Screenshot 2024-07-24 224840](https://github.com/user-attachments/assets/b8d95086-0cf1-478d-ba98-dd8ca1462630)
+
+
+I am pretty proud with the code as well. You can check it out too. Thanks for reading!
 
 
 Onto the next project! 
